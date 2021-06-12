@@ -9,9 +9,12 @@ To run this reproduction:
  - `docker compose up`
  - `npm start` or `npm start -- map`
 
-Running `npm start` without arguments will load entities using `em.find()`.
-Running with `map` will load entities using a combination of
-`em.getConnection().execute()` and `em.map()`.
+Running `npm start` without arguments will load `Book` entities using
+`em.find()`. Running with `map` will load `Book` entities using
+a combination of `em.getConnection().execute()` and `em.map()`.
+
+In both scenarios the `author` relation of the loaded entities is populated
+using `em.populate()` and then `FLUSH` is called.
 
 In the first scenario two `SELECT` queries will be logged to the console.
 This is the expected behaviour.
