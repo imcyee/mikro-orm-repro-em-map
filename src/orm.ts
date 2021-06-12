@@ -15,5 +15,5 @@ export const createConnection = async (): Promise<MikroORM<PostgreSqlDriver>> =>
     type: 'postgresql',
     clientUrl: 'postgresql://maptest:maptest@localhost:5432/maptest',
     subscribers: [],
-    debug: true,
+    debug: ['query', 'query-params'],
   });
