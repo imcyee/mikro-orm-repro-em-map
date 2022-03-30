@@ -13,7 +13,7 @@ export const createConnection = async (): Promise<MikroORM<PostgreSqlDriver>> =>
       enabled: false,
     },
     type: 'postgresql',
-    clientUrl: 'postgresql://maptest:maptest@localhost:5432/maptest',
+    clientUrl: 'postgresql://maptest:maptest@localhost:5333/maptest',
     subscribers: [],
     debug: ['query', 'query-params'],
   });

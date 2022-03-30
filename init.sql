@@ -12,3 +12,5 @@ CREATE TABLE "book" (
 
 INSERT INTO "author" ("name") VALUES ('Pete');
 INSERT INTO "book" ("author_id", "name") VALUES (1, 'Life of Pete');
+INSERT INTO "book" ("author_id", "name") VALUES (1, 'Life of Pete 2');
+INSERT INTO "book" ("author_id", "name") VALUES (1, 'Life of Pete 3');

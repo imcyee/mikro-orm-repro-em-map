@@ -1,17 +1,7 @@
 import { EntityComparator } from '@mikro-orm/core';
-import { EntityManager } from '@mikro-orm/postgresql';
-import { Book } from './entities';
+import { Author } from './entities';
 import { createConnection } from './orm';
-
-async function getBooksUsingFind(em: EntityManager): Promise<Book[]> {
-  return em.find(Book, {});
-}
-
-async function getBooksUsingMap(em: EntityManager): Promise<Book[]> {
-  const result = await em.getConnection().execute('SELECT * FROM "book"');
-  return result.map((data) => em.map(Book, data));
-}
-
+ 
 (async () => {
   const orm = await createConnection();
 
@@ -23,17 +13,19 @@ async function getBooksUsingMap(em: EntityManager): Promise<Book[]> {
     console.log(' Prepare result:', res);
     return res;
   };
-
-  console.log('Loading books...');
-  const books = process.argv[2] === 'map'
-    ? await getBooksUsingMap(orm.em)
-    : await getBooksUsingFind(orm.em);
-
-  console.log('Populating authors...');
-  await orm.em.populate(books, 'author');
+ 
+  const author = await orm.em.map(Author, {
+    id: 1,
+    name: 'Pete',
+    books: [
+      { id: 1, name: 'Life of Pete' },
+      { id: 2, name: 'Life of Pete 2' },
+      { id: 3, name: 'Life of Pete 3' },
+    ]
+  })
+  console.log('author', author);
 
   console.log('Calling flush()...');
-  await orm.em.flush();
-
+  await orm.em.flush(); 
   await orm.close();
 })();
