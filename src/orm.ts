@@ -6,6 +6,7 @@ const rootDir = `${__dirname}/..`;
 
 export const createConnection = async (): Promise<MikroORM<PostgreSqlDriver>> =>
   MikroORM.init({
+    allowGlobalContext: true,
     entities: [`${rootDir}/build/entities/*`],
     entitiesTs: [`${rootDir}/src/entities/*`],
     metadataProvider: TsMorphMetadataProvider,
