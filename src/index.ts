@@ -5,14 +5,14 @@ import { createConnection } from './orm';
 (async () => {
   const orm = await createConnection();
 
-  const comparator = (orm.em.getUnitOfWork() as any).comparator;
-  comparator.prepareEntity = (entity: any) => {
-    const res = EntityComparator.prototype.prepareEntity.call(comparator, entity);
-    console.log(`EntityComparator.prepareEntity(${entity.constructor.name} #${entity.id}):`);
-    console.log(' Actual data:', entity);
-    console.log(' Prepare result:', res);
-    return res;
-  };
+  // const comparator = (orm.em.getUnitOfWork() as any).comparator;
+  // comparator.prepareEntity = (entity: any) => {
+  //   const res = EntityComparator.prototype.prepareEntity.call(comparator, entity);
+  //   console.log(`EntityComparator.prepareEntity(${entity.constructor.name} #${entity.id}):`);
+  //   console.log(' Actual data:', entity);
+  //   console.log(' Prepare result:', res);
+  //   return res;
+  // };
  
   const author = await orm.em.map(Author, {
     id: 1,
